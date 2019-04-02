@@ -104,6 +104,8 @@ def download_http(url):
 @click.argument('url')
 def download(url):
     """This download to the configuration folder and return path file corresponding to the given url"""
+    if not os.path.exists(FOLDER):
+        os.makedirs(FOLDER)
     uri = urlparse(url)
     result = '{uri.scheme}://{uri.netloc}/'.format(uri=uri)
     click.echo("Start downloading {} ...".format(url))

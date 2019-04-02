@@ -36,6 +36,10 @@ python3 setup.py test
 
 ### Example
 
+Default script will download to folder downloads in current path. 
+
+Download from HTTP
+
 ```bash
 python3 hercules/cli.py download https://i.pinimg.com/564x/07/ae/16/07ae164da80a7168c59a01c41bfdb74a.jpg
 ```
@@ -50,4 +54,10 @@ Download from SFTP
 
 ```bash
 python3 hercules/cli.py download sftp://206.189.83.200//home/agoda_sftp_user/agoda.jpg
+```
+
+If want to change destination, add env parameter FOLDER_DOWNLOAD, example:
+
+```bash
+FOLDER_DOWNLOAD=custom_download python3 hercules/cli.py download https://i.pinimg.com/564x/07/ae/16/07ae164da80a7168c59a01c41bfdb74a.jpg
 ```
