@@ -72,10 +72,15 @@ def download_sftp(host,remote_path,username,password):
         transport.connect(username = username, password = password)
         sftp = paramiko.SFTPClient.from_transport(transport)
         sftp.get(remote_path, local_filename)
+        click.echo("Downloaded {}".format(local_filename))
+        return local_filename
     except Exception as e:
         click.echo('Error during download from FTP: {}'.format(str(e)))
-    sftp.close()
-    transport.close()
+        return None
+    finally:
+        sftp.close()
+        transport.close()
+    
 
 def download_http(url):
     """Download protocal http"""
@@ -89,11 +94,11 @@ def download_http(url):
         for data in tqdm(r.iter_content(block_size), total=math.ceil(total_size//block_size) , unit='KB', unit_scale=True):
             wrote = wrote  + len(data)
             f.write(data)
-            
-
     if total_size != 0 and wrote != total_size:
         click.echo("ERROR, something went wrong")
+        return None
     click.echo("Downloaded {}".format(local_filename))
+    return local_filename
 
 @main.command()
 @click.argument('url')
