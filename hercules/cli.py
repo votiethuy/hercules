@@ -100,10 +100,7 @@ def download_http(url):
     click.echo("Downloaded {}".format(local_filename))
     return local_filename
 
-@main.command()
-@click.argument('url')
-def download(url):
-    """This download to the configuration folder and return path file corresponding to the given url"""
+def download_url(url):
     if not os.path.exists(FOLDER):
         os.makedirs(FOLDER)
     uri = urlparse(url)
@@ -118,7 +115,23 @@ def download(url):
         username, password = promt_user()
         download_sftp(uri.netloc, uri.path, username, password)
     else:
-        click.echo("{} not supported".format(uri.scheme))
+        click.echo("{} not supported".format(uri.scheme)) 
+
+@main.command()
+@click.argument('url')
+def download(url):
+    """This download to the configuration folder and return path file corresponding to the given url"""
+    download_url(url)
+
+@main.command()
+@click.argument('urls_file', envvar='SRC', type=click.File('r'))
+def download_from_urls_file(urls_file):
+    """This download from urls_file"""
+    list_urls_data = urls_file.read()
+    list_url = list_urls_data.split('\n')
+    for url in list_url:
+        download_url(str(url))
+    click.echo(list_url)
 
 
 if __name__ == "__main__":

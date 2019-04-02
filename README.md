@@ -56,6 +56,12 @@ Download from SFTP
 python3 hercules/cli.py download sftp://206.189.83.200//home/agoda_sftp_user/agoda.jpg
 ```
 
+Download list urls in file
+
+```bash
+python3 hercules/cli.py download-from-urls-file urls.txt
+```
+
 If want to change destination, add env parameter FOLDER_DOWNLOAD, example:
 
 ```bash

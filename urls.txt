@@ -1,0 +1,3 @@
+https://i.pinimg.com/564x/07/ae/16/07ae164da80a7168c59a01c41bfdb74a.jpg
+ftp://206.189.83.200/files/agoda.jpg
+sftp://206.189.83.200//home/agoda_sftp_user/agoda.jpg
