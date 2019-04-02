@@ -53,6 +53,8 @@ setup(
         'Programming Language :: Python :: 3.7',
     ],
     keywords = 'cli',
+    python_requires='>=3.4',
+    test_suite="tests",
     packages = find_packages(exclude=['docs', 'tests*']),
     install_requires = ['click','requests','tqdm'],
     extras_require = {

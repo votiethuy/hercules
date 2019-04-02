@@ -39,3 +39,15 @@ python3 -m unittest discover -s tests
 ```bash
 python3 hercules/cli.py download https://i.pinimg.com/564x/07/ae/16/07ae164da80a7168c59a01c41bfdb74a.jpg
 ```
+
+public FTP host for testing
+
+```code
+FTP URL: ftp.dlptest.com or ftp://ftp.dlptest.com/
+FTP User: dlpuser@dlptest.com
+Password: VADPRDqid4TaB0r5a2B0n9wLp
+```
+
+```bash
+python3 hercules/cli.py download ftp://ftp.dlptest.com/ftp/07ae164da80a7168c59a01c41bfdb74a.jpg
+```
