@@ -46,8 +46,8 @@ def download_ftp(host,remote_path):
                     os.remove(local_filename)
                     return None
             return local_filename
-        except:
-            click.echo('Error during download from FTP')
+        except Exception as e:
+            click.echo('Error during download from FTP {}'.format(str(e)))
             return None
         
 
