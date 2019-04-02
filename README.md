@@ -49,5 +49,5 @@ python3 hercules/cli.py download ftp://206.189.83.200/files/agoda.jpg
 Download from SFTP
 
 ```bash
-python3 hercules/cli.py download sftp://206.189.83.200/home/agoda_sftp_user/agoda.jpg
+python3 hercules/cli.py download sftp://206.189.83.200//home/agoda_sftp_user/agoda.jpg
 ```
