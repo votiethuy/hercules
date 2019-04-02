@@ -36,7 +36,7 @@ python3 setup.py test
 
 ### Example
 
-Default script will download to folder downloads in current path. 
+Default script will download to folder downloads in current path.
 
 Download from HTTP
 

@@ -107,15 +107,16 @@ def download_url(url):
     result = '{uri.scheme}://{uri.netloc}/'.format(uri=uri)
     click.echo("Start downloading {} ...".format(url))
     if uri.scheme == 'http' or uri.scheme == 'https':
-        download_http(url)
+        return download_http(url)
     elif uri.scheme == 'ftp':
         username, password = promt_user()
-        download_ftp(uri.netloc, uri.path, username, password)
+        return download_ftp(uri.netloc, uri.path, username, password)
     elif uri.scheme == 'sftp':
         username, password = promt_user()
-        download_sftp(uri.netloc, uri.path, username, password)
+        return download_sftp(uri.netloc, uri.path, username, password)
     else:
-        click.echo("{} not supported".format(uri.scheme)) 
+        click.echo("{} not supported".format(uri.scheme))
+        return None
 
 @main.command()
 @click.argument('url')

@@ -3,6 +3,12 @@ import os
 
 from hercules import cli
 
+@pytest.mark.parametrize('url, expected', [("https://i.pinimg.com/564x/07/ae/16/07ae164da80a7168c59a01c41bfdb74a.jpg", "downloads/07ae164da80a7168c59a01c41bfdb74a.jpg")])
+def test_download_url(url, expected):
+    local_file_name = cli.download_url(url)
+    assert local_file_name == expected
+    assert os.path.exists(expected)
+    os.remove(expected) # clean test data download
 
 @pytest.mark.parametrize('url, expected', [("https://i.pinimg.com/564x/07/ae/16/07ae164da80a7168c59a01c41bfdb74a.jpg", "downloads/07ae164da80a7168c59a01c41bfdb74a.jpg")])
 def test_download_http(url, expected):
