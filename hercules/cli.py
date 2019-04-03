@@ -33,6 +33,7 @@ def download_ftp(host,remote_path, ftp_user, ftp_password):
     """Download protocal FTP"""
     file_name = os.path.basename(remote_path)
     local_filename = os.path.join(FOLDER, file_name)
+    bufsize=1024
     with closing(ftplib.FTP()) as ftp:
         try:
             ftp.connect(host, timeout=30*5)
@@ -43,16 +44,16 @@ def download_ftp(host,remote_path, ftp_user, ftp_password):
                 ftp.login()
             with open(local_filename, 'w+b') as f:
                 total = ftp.size(remote_path)
-                with tqdm(total=total,unit_scale=True,desc=remote_path,miniters=1,file=sys.stdout,leave=True) as pbar:
+                with tqdm(total=total,unit='B', unit_scale=True, unit_divisor=1024, disable=False) as pbar:
                     def cb(data):
                         pbar.update(len(data))
                         f.write(data)
-                res = ftp.retrbinary('RETR %s' % remote_path, cb)
-                if not res.startswith('226'):
-                    click.echo('Downloaded of file {0} is not compile.'.format(remote_path))
-                    click.echo(res)
-                    os.remove(local_filename)
-                    return None
+                    res = ftp.retrbinary('RETR %s' % remote_path, cb, bufsize)
+                    if not res.startswith('226'):
+                        click.echo('Downloaded of file {0} is not compile.'.format(remote_path))
+                        click.echo(res)
+                        os.remove(local_filename)
+                        return None
             click.echo("Downloaded {}".format(local_filename))
             return local_filename
         except Exception as e:
