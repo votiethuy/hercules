@@ -56,7 +56,7 @@ setup(
     python_requires='>=3.4',
     test_suite="tests",
     packages = find_packages(exclude=['docs', 'tests*']),
-    install_requires = ['click','requests','tqdm','paramiko'],
+    install_requires = ['click','requests','tqdm','paramiko','tabulate'],
     extras_require = {
         'test': ['coverage', 'pytest', 'pytest-cov'],
     },

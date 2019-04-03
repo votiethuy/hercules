@@ -8,8 +8,10 @@ from urllib.parse import urlparse
 import ftplib
 from contextlib import closing
 import paramiko
+from tabulate import tabulate
 
 FOLDER = os.environ.get("FOLDER_DOWNLOAD", "downloads") # if not set path to download it will download to downloads folder
+
 
 @click.group()
 def main():
@@ -17,11 +19,6 @@ def main():
     Simple CLI for downloading data from multiple sources and protocols to local disk.
     """
     pass
-
-@main.command()
-def config():
-    """This create config file for usage later"""
-    click.echo("Config Done")
 
 def promt_user():
     username = click.prompt("Username or enter '-' to skip")
@@ -133,9 +130,11 @@ def download_from_urls_file(urls_file):
     """This download from urls_file"""
     list_urls_data = urls_file.read()
     list_url = list_urls_data.split('\n')
+    result_list = []
     for url in list_url:
-        download_url(str(url))
-    click.echo(list_url)
+        result = download_url(str(url))
+        result_list.append({'url':url,'file_path':result})
+    click.echo(tabulate(result_list, headers="keys"))
 
 
 if __name__ == "__main__":
