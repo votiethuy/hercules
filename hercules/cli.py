@@ -52,7 +52,7 @@ def download_ftp(host,remote_path, ftp_user, ftp_password):
                     if not res.startswith('226'):
                         click.echo('Downloaded of file {0} is not compile.'.format(remote_path))
                         click.echo(res)
-                        os.remove(local_filename)
+                        os.remove(local_filename) # Cleanup
                         return None
             click.echo("Downloaded {}".format(local_filename))
             return local_filename
@@ -74,8 +74,8 @@ def download_sftp(host,remote_path,username,password):
         click.echo("Downloaded {}".format(local_filename))
         return local_filename
     except Exception as e:
-        click.echo('Error during download from FTP: {}'.format(str(e)))
-        os.remove(local_filename)
+        click.echo('Error during download from SFTP: {}'.format(str(e)))
+        os.remove(local_filename) # Cleanup
         return None
     finally:
         sftp.close()
@@ -95,7 +95,7 @@ def download_http(url):
             wrote = wrote  + len(data)
             f.write(data)
     if total_size != 0 and wrote != total_size:
-        os.remove(local_filename)
+        os.remove(local_filename) # Cleanup
         click.echo("ERROR, something went wrong")
         return None
     click.echo("Downloaded {}".format(local_filename))
