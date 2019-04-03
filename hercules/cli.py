@@ -78,8 +78,10 @@ def download_sftp(host,remote_path,username,password):
         os.remove(local_filename) # Cleanup
         return None
     finally:
-        sftp.close()
-        transport.close()
+        if sftp:
+            sftp.close()
+        if transport:
+            transport.close()
     
 
 def download_http(url):
