@@ -60,6 +60,7 @@ def download_ftp(host,remote_path, ftp_user, ftp_password):
             return local_filename
         except Exception as e:
             click.echo('Error during download from FTP: {}'.format(str(e)))
+            os.remove(local_filename)
             return None
         
 
@@ -76,6 +77,7 @@ def download_sftp(host,remote_path,username,password):
         return local_filename
     except Exception as e:
         click.echo('Error during download from FTP: {}'.format(str(e)))
+        os.remove(local_filename)
         return None
     finally:
         sftp.close()
@@ -95,6 +97,7 @@ def download_http(url):
             wrote = wrote  + len(data)
             f.write(data)
     if total_size != 0 and wrote != total_size:
+        os.remove(local_filename)
         click.echo("ERROR, something went wrong")
         return None
     click.echo("Downloaded {}".format(local_filename))
